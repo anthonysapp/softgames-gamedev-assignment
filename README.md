@@ -1,6 +1,6 @@
 # SOFTGAMES Game Dev Assignment
 
-A multi-scene interactive web game built with **PixiJS** and **TypeScript**, showcasing various animation techniques and game mechanics.
+A multi-scene interactive web game built with **PixiJS** and **TypeScript**, showcasing various techniques and game mechanics.
 
 ## 🎮 Game Scenes
 
@@ -13,8 +13,8 @@ A multi-scene interactive web game built with **PixiJS** and **TypeScript**, sho
 
 - **PixiJS 7.4.3** - Pixi.js 7
 - **TypeScript** - Type-safe JavaScript
-- **GSAP** - High-performance animations
-- **Vite** - Build tool and dev server
+- **GSAP** - Animations
+- **Vite** - Build tool / dev server
 - **pnpm** - Package manager
 
 ## 🚀 Quick Start
