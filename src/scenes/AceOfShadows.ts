@@ -1,11 +1,11 @@
-import { Card } from "@/gameObjects/Card";
-import { Scene } from "@/scenes/Scene";
-import { generateDeck } from "@/utils/cards";
-import { Colors } from "@/utils/constants";
-import { delay } from "@/utils/delay";
-import { Size } from "@/utils/types";
-import gsap from "gsap";
-import { Container } from "pixi.js";
+import { Card } from '@/gameObjects/Card';
+import { Scene } from '@/scenes/Scene';
+import { generateDeck } from '@/utils/cards';
+import { Colors } from '@/utils/constants';
+import { delay } from '@/utils/delay';
+import { Size } from '@/utils/types';
+import gsap from 'gsap';
+import { Container } from 'pixi.js';
 
 /**
  * The Ace of Shadows scene
@@ -13,8 +13,7 @@ import { Container } from "pixi.js";
  */
 export class AceOfShadows extends Scene {
   private static readonly ANIMATION_DURATION = 2; // 2 seconds as per the instructions
-  private static readonly ANIMATION_DELAY =
-    AceOfShadows.ANIMATION_DURATION * 0.5; // 1 second as per the instructions -
+  private static readonly ANIMATION_DELAY = AceOfShadows.ANIMATION_DURATION * 0.5; // 1 second as per the instructions -
   private static readonly STACK_POSITIONS = [50, 300]; // the positions of the stacks
   private readonly STACK_OFFSET = { x: 0.25, y: 1 }; // the offset of the cards
 
@@ -29,7 +28,7 @@ export class AceOfShadows extends Scene {
   private currentStack: Card[] = [];
 
   constructor() {
-    super({ name: "AceOfShadows" });
+    super({ name: 'AceOfShadows' });
   }
 
   destroy() {
@@ -96,8 +95,7 @@ export class AceOfShadows extends Scene {
     const stack = this.currentStack;
     const otherStack = stack === this.stack1 ? this.stack2 : this.stack1;
 
-    const container =
-      stack === this.stack1 ? this.cardContainer2 : this.cardContainer;
+    const container = stack === this.stack1 ? this.cardContainer2 : this.cardContainer;
 
     const card = stack.pop();
 
@@ -109,12 +107,9 @@ export class AceOfShadows extends Scene {
       x: this.nextPosition.x,
       y: this.nextPosition.y,
       duration: AceOfShadows.ANIMATION_DURATION,
-      ease: "power2.inOut",
+      ease: 'power2.inOut',
       onStart: () => {
-        card!.flip(
-          AceOfShadows.ANIMATION_DURATION * 0.25,
-          AceOfShadows.ANIMATION_DURATION * 0.25
-        );
+        card!.flip(AceOfShadows.ANIMATION_DURATION * 0.25, AceOfShadows.ANIMATION_DURATION * 0.25);
       },
     });
 
@@ -122,18 +117,14 @@ export class AceOfShadows extends Scene {
     this.nextPosition.y -= this.STACK_OFFSET.y;
 
     if (stack.length === 0) {
-      this.initNextPosition(
-        stack === this.stack1 ?
-          AceOfShadows.STACK_POSITIONS[0]
-        : AceOfShadows.STACK_POSITIONS[1]
-      );
+      this.initNextPosition(stack === this.stack1 ? AceOfShadows.STACK_POSITIONS[0] : AceOfShadows.STACK_POSITIONS[1]);
       this.currentStack = stack === this.stack1 ? this.stack2 : this.stack1;
     }
 
     this.animateNext(
-      stack.length === 0 ?
-        AceOfShadows.ANIMATION_DURATION + AceOfShadows.ANIMATION_DELAY
-      : AceOfShadows.ANIMATION_DELAY
+      stack.length === 0
+        ? AceOfShadows.ANIMATION_DURATION + AceOfShadows.ANIMATION_DELAY
+        : AceOfShadows.ANIMATION_DELAY,
     );
   }
 

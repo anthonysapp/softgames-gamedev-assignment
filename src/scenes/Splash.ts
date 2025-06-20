@@ -1,8 +1,8 @@
-import { Scene } from "@/scenes/Scene";
-import { SpriteButton } from "@/ui/SpriteButton";
-import { Colors, SceneID } from "@/utils/constants";
-import { Size } from "@/utils/types";
-import { BitmapText, Container } from "pixi.js";
+import { Scene } from '@/scenes/Scene';
+import { SpriteButton } from '@/ui/SpriteButton';
+import { Colors, SceneID } from '@/utils/constants';
+import { Size } from '@/utils/types';
+import { BitmapText, Container } from 'pixi.js';
 
 /**
  * The splash screen
@@ -12,7 +12,7 @@ export class Splash extends Scene {
   private buttons: Container = new Container();
 
   constructor() {
-    super({ name: "Splash" });
+    super({ name: 'Splash' });
   }
 
   initialize(): void {
@@ -24,9 +24,9 @@ export class Splash extends Scene {
     // add the buttons to the scene
     this.addChild(this.buttons);
 
-    this.addButton("Ace of Shadows", "aceOfShadows");
-    this.addButton("Magic Words", "magicWords");
-    this.addButton("Phoenix Flame", "phoenixFlame");
+    this.addButton('Ace of Shadows', 'aceOfShadows');
+    this.addButton('Magic Words', 'magicWords');
+    this.addButton('Phoenix Flame', 'phoenixFlame');
 
     this.buttons.children.forEach((child, i) => {
       child.y = i * 150;
@@ -34,8 +34,8 @@ export class Splash extends Scene {
   }
 
   addTitle() {
-    this.title = new BitmapText("Anthony Sapp", {
-      fontName: "Bangers",
+    this.title = new BitmapText('Anthony Sapp', {
+      fontName: 'Bangers',
       fontSize: 100,
     });
     this.title.tint = 0x0;
@@ -65,9 +65,9 @@ export class Splash extends Scene {
   }
 
   resize(): void {
-    this.buttons.y = this.buttons.height * -0.5;
+    this.buttons.y = this.buttons.height * -0.5 + 100;
     if (this.title) {
-      this.title.y = this.buttons.y - this.title.textHeight - 40;
+      this.title.y = this.buttons.y - this.title.textHeight - 60;
     }
   }
 }

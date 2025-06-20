@@ -1,6 +1,6 @@
-import { type Size } from "@/utils/types";
-import { Container as PixiContainer } from "pixi.js";
-import { GameApplication } from "../GameApplication";
+import { type Size } from '@/utils/types';
+import { Container as PixiContainer } from 'pixi.js';
+import { GameApplication } from '../GameApplication';
 
 export type IContainerOptions = {
   name?: string;
@@ -9,7 +9,7 @@ export type IContainerOptions = {
 };
 
 const defaultOptions: IContainerOptions = {
-  name: "Container",
+  name: 'Container',
   autoResize: true,
   autoUpdate: true,
 };

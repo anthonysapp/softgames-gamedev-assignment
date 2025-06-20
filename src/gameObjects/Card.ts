@@ -1,5 +1,5 @@
-import gsap from "gsap";
-import { Sprite, Texture } from "pixi.js";
+import gsap from 'gsap';
+import { Sprite, Texture } from 'pixi.js';
 
 /**
  * A card game object
@@ -15,7 +15,7 @@ export class Card extends Sprite {
   constructor(suit: string, rank: string) {
     super();
     this.name = `${suit}${rank}`;
-    this.back = Texture.from("cardBack_red5.png");
+    this.back = Texture.from('cardBack_red5.png');
     this.front = Texture.from(`card${suit}${rank}.png`);
     this.texture = this.front;
     this.anchor.set(0.5);
@@ -36,7 +36,7 @@ export class Card extends Sprite {
     tl.to(this.scale, {
       x: 0,
       duration: duration * 0.5,
-      ease: "power2.in",
+      ease: 'power2.in',
     });
 
     tl.add(() => {
@@ -48,7 +48,7 @@ export class Card extends Sprite {
     tl.to(this.scale, {
       x: -scale,
       duration: duration * 0.5,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
   }
 }

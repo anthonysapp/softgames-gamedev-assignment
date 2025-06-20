@@ -1,15 +1,13 @@
-import { BlurFilter, ParticleContainer, Sprite, Texture } from "pixi.js";
+import { BlurFilter, ParticleContainer, Sprite, Texture } from 'pixi.js';
 
 /**
  * Our fire particle
  */
 class Ember extends Sprite {
-  public static ASSETS = ["circle_05.png"];
+  public static ASSETS = ['circle_05.png'];
 
   private static getTexture() {
-    return Texture.from(
-      Ember.ASSETS[Math.floor(Math.random() * Ember.ASSETS.length)]
-    );
+    return Texture.from(Ember.ASSETS[Math.floor(Math.random() * Ember.ASSETS.length)]);
   }
 
   public trajectory: { x: number; y: number } = { x: 0, y: 0 };
@@ -23,9 +21,7 @@ class Ember extends Sprite {
   }
 
   getTexture() {
-    return Texture.from(
-      Ember.ASSETS[Math.floor(Math.random() * Ember.ASSETS.length)]
-    );
+    return Texture.from(Ember.ASSETS[Math.floor(Math.random() * Ember.ASSETS.length)]);
   }
 
   init(trajectory: { x: number; y: number }) {
@@ -76,10 +72,7 @@ class Ember extends Sprite {
       b = 0;
     }
 
-    this.tint =
-      (Math.floor(r * 255) << 16) +
-      (Math.floor(g * 255) << 8) +
-      Math.floor(b * 255);
+    this.tint = (Math.floor(r * 255) << 16) + (Math.floor(g * 255) << 8) + Math.floor(b * 255);
 
     // Alpha fades out as particle rises and ages
     this.alpha = (1 - lifeProgress) * (1 - heightProgress * 0.5);

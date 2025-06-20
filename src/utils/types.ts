@@ -19,7 +19,7 @@ export type EmojiData = {
 export type AvatarData = {
   name: string;
   url: string;
-  position: "left" | "right";
+  position: 'left' | 'right';
 };
 
 export type MagicWordsData = {

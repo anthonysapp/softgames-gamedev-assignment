@@ -1,6 +1,6 @@
-import { Container, type IContainerOptions } from "@/display/Container";
-import { type Size } from "@/utils/types";
-import { Sprite, Texture, type IDestroyOptions } from "pixi.js";
+import { Container, type IContainerOptions } from '@/display/Container';
+import { type Size } from '@/utils/types';
+import { Sprite, Texture, type IDestroyOptions } from 'pixi.js';
 
 /**
  * A base scene to build from
@@ -9,7 +9,7 @@ import { Sprite, Texture, type IDestroyOptions } from "pixi.js";
 export class Scene extends Container {
   protected __background: Sprite | null = null;
 
-  constructor(options: IContainerOptions = { name: "Scene" }) {
+  constructor(options: IContainerOptions = { name: 'Scene' }) {
     super(options);
   }
 
@@ -25,7 +25,7 @@ export class Scene extends Container {
     this.addChild(spr);
 
     this.__background.anchor.set(0.5, 0.5);
-    this.__background.name = "background";
+    this.__background.name = 'background';
     return spr;
   }
 

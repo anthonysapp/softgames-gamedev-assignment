@@ -1,6 +1,6 @@
-import { Container } from "@/display/Container";
-import gsap from "gsap";
-import { BitmapText, Graphics, Container as PIXIContainer } from "pixi.js";
+import { Container } from '@/display/Container';
+import gsap from 'gsap';
+import { BitmapText, Graphics, Container as PIXIContainer } from 'pixi.js';
 
 export class SpeechBubble extends Container {
   background: PIXIContainer = new PIXIContainer();
@@ -10,7 +10,7 @@ export class SpeechBubble extends Container {
   currentPosition: { x: number; y: number } = { x: 5, y: 5 };
   onScreenTexts: BitmapText[] = [];
 
-  constructor(public direction: "left" | "right") {
+  constructor(public direction: 'left' | 'right') {
     super();
     this.direction = direction;
     this.background = this.addChild(new PIXIContainer());
@@ -18,10 +18,10 @@ export class SpeechBubble extends Container {
     this.textContainer = this.addChild(new PIXIContainer());
 
     for (let i = 0; i < 40; i++) {
-      const text = new BitmapText("HI", {
-        fontName: "Bangers",
+      const text = new BitmapText('HI', {
+        fontName: 'Bangers',
         fontSize: 32,
-        align: "left",
+        align: 'left',
       });
       text.tint = 0x0;
       this.texts.push(text);
@@ -81,7 +81,7 @@ export class SpeechBubble extends Container {
     gsap.fromTo(
       text,
       { alpha: 0, y: pos.y + 5, x: pos.x },
-      { alpha: 1, y: pos.y, x: pos.x, duration: 0.3, ease: "power2.out" }
+      { alpha: 1, y: pos.y, x: pos.x, duration: 0.3, ease: 'power2.out' },
     );
   }
 }

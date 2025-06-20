@@ -1,6 +1,6 @@
-import { Container } from "@/display/Container";
-import { Button } from "@pixi/ui";
-import { BitmapText, Sprite, Texture } from "pixi.js";
+import { Container } from '@/display/Container';
+import { Button } from '@pixi/ui';
+import { BitmapText, Sprite, Texture } from 'pixi.js';
 
 export type SpriteButtonProps = {
   text: string;
@@ -13,11 +13,11 @@ export type SpriteButtonProps = {
 };
 
 const defaultProps = {
-  text: "",
+  text: '',
   disabled: false,
   textures: {
-    default: "button_rectangle_depth_gloss.png",
-    down: "button_rectangle_gloss.png",
+    default: 'button_rectangle_depth_gloss.png',
+    down: 'button_rectangle_gloss.png',
   },
 };
 
@@ -43,11 +43,11 @@ export class SpriteButton extends Button {
 
     this.buttonBg.anchor.set(0.5);
 
-    this.textView = new BitmapText(props.text ?? "", {
-      fontName: "Bangers",
+    this.textView = new BitmapText(props.text ?? '', {
+      fontName: 'Bangers',
       fontSize: 40,
-      fill: 0xffffff,
     });
+
     this.textView.y = -5;
     this.textView.anchor.set(0.5);
 

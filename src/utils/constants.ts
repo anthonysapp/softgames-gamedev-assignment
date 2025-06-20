@@ -1,10 +1,5 @@
 // strong typing the scene ids
-export const Scenes = [
-  "splash",
-  "aceOfShadows",
-  "magicWords",
-  "phoenixFlame",
-] as const;
+export const Scenes = ['splash', 'aceOfShadows', 'magicWords', 'phoenixFlame'] as const;
 
 export type SceneID = (typeof Scenes)[number];
 

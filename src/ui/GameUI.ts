@@ -1,45 +1,45 @@
-import { Container } from "@/display/Container";
-import { Colors, SceneID } from "@/utils/constants";
-import gsap from "gsap";
-import { BitmapText, Graphics, Sprite, Texture } from "pixi.js";
-import { SpriteButton } from "./SpriteButton";
+import { Container } from '@/display/Container';
+import { Colors, SceneID } from '@/utils/constants';
+import gsap from 'gsap';
+import { BitmapText, Graphics, Sprite, Texture } from 'pixi.js';
+import { SpriteButton } from './SpriteButton';
 
 export class GameUI extends Container {
-  settingsButton: Sprite = new Sprite(Texture.from("gear.png"));
-  menuText: BitmapText;
+  settingsButton: Sprite = new Sprite(Texture.from('gear.png'));
+  menuText: BitmapText | null = null;
   menu: Container = new Container();
   menuOpen: boolean = false;
 
   constructor() {
-    super({ name: "GameUI", autoResize: true, autoUpdate: false });
+    super({ name: 'GameUI', autoResize: true, autoUpdate: false });
     this.addSettingsButton();
     this.addMenu();
   }
 
   addSettingsButton() {
-    this.menuText = new BitmapText("Menu", {
-      fontName: "Bangers",
+    this.menuText = new BitmapText('Menu', {
+      fontName: 'Bangers',
       fontSize: 40,
-      align: "left",
+      align: 'left',
     });
     this.menuText.tint = 0xffffff;
     this.menuText.x = 10;
     this.addChild(this.menuText);
     this.addChild(this.settingsButton);
-    this.settingsButton.eventMode = "static";
-    this.settingsButton.cursor = "pointer";
-    this.settingsButton.on("pointerdown", () => {});
+    this.settingsButton.eventMode = 'static';
+    this.settingsButton.cursor = 'pointer';
+    this.settingsButton.on('pointerdown', () => {});
 
-    this.settingsButton.on("pointerover", () => {
+    this.settingsButton.on('pointerover', () => {
       this.settingsButton.tint = Colors.YELLOW;
     });
-    this.settingsButton.on("pointerout", () => {
+    this.settingsButton.on('pointerout', () => {
       this.settingsButton.tint = 0xffffff;
     });
-    this.settingsButton.on("pointerup", () => {
+    this.settingsButton.on('pointerup', () => {
       this.toggleMenu();
     });
-    this.settingsButton.on("pointerupoutside", () => {
+    this.settingsButton.on('pointerupoutside', () => {
       this.settingsButton.tint = 0xffffff;
     });
   }
@@ -59,9 +59,9 @@ export class GameUI extends Container {
     gfx.drawRoundedRect(0, 0, 360, 400, 10);
     gfx.endFill();
 
-    this.addButton("Ace of Shadows", "aceOfShadows", 80);
-    this.addButton("Magic Words", "magicWords", 200);
-    this.addButton("Phoenix Flame", "phoenixFlame", 320);
+    this.addButton('Ace of Shadows', 'aceOfShadows', 80);
+    this.addButton('Magic Words', 'magicWords', 200);
+    this.addButton('Phoenix Flame', 'phoenixFlame', 320);
 
     this.menu.pivot.x = -600;
   }
@@ -93,7 +93,7 @@ export class GameUI extends Container {
     gsap.to(this.menu.pivot, {
       x: 0,
       duration: 0.4,
-      ease: "back.out(0.5)",
+      ease: 'back.out(0.5)',
     });
   }
 
@@ -102,7 +102,7 @@ export class GameUI extends Container {
     gsap.to(this.menu.pivot, {
       x: -600,
       duration: 0.3,
-      ease: "back.in(0.5)",
+      ease: 'back.in(0.5)',
     });
   }
 
@@ -116,7 +116,9 @@ export class GameUI extends Container {
     this.settingsButton.x = this.size.width * 0.5 - 100;
     this.settingsButton.y = this.size.height * 0.5 - 100;
 
-    this.menuText.x = this.settingsButton.x - 80;
-    this.menuText.y = this.settingsButton.y + 35;
+    if (this.menuText) {
+      this.menuText.x = this.settingsButton.x - 80;
+      this.menuText.y = this.settingsButton.y + 35;
+    }
   }
 }

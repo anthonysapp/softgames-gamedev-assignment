@@ -1,17 +1,17 @@
-import assetManifest from "@/assets.json";
-import { Container } from "@/display/Container";
-import { type Scene } from "@/scenes/Scene";
-import { SceneID } from "@/utils/constants";
-import { type Size } from "@/utils/types";
-import { initDevtools } from "@pixi/devtools";
-import gsap from "gsap";
-import type { IApplicationOptions } from "pixi.js";
-import { Application, Assets, Ticker, UPDATE_PRIORITY } from "pixi.js";
+import assetManifest from '@/assets.json';
+import { Container } from '@/display/Container';
+import { type Scene } from '@/scenes/Scene';
+import { SceneID } from '@/utils/constants';
+import { type Size } from '@/utils/types';
+import { initDevtools } from '@pixi/devtools';
+import gsap from 'gsap';
+import type { IApplicationOptions } from 'pixi.js';
+import { Application, Assets, Ticker, UPDATE_PRIORITY } from 'pixi.js';
 // @ts-expect-error - no types for stats.js
-import Stats from "stats.js";
-import { Signal } from "typed-signals";
-import { GameUI } from "./ui/GameUI";
-import { resize } from "./utils/resize";
+import Stats from 'stats.js';
+import { Signal } from 'typed-signals';
+import { GameUI } from './ui/GameUI';
+import { resize } from './utils/resize';
 
 export interface IResizeOptions {
   minWidth?: number;
@@ -60,9 +60,7 @@ export class GameApplication extends Application {
     super(options);
 
     if (options.scenes) {
-      this.scenes = new Map(
-        Object.entries(options.scenes).map(([key, value]) => [key, value])
-      );
+      this.scenes = new Map(Object.entries(options.scenes).map(([key, value]) => [key, value]));
     }
 
     this._options = options as IGameOptions;
@@ -72,17 +70,13 @@ export class GameApplication extends Application {
     GameApplication._resizeTo = this._options.resizeTo;
   }
 
-  public static async init(
-    options?: Partial<IGameOptions>
-  ): Promise<GameApplication> {
+  public static async init(options?: Partial<IGameOptions>): Promise<GameApplication> {
     if (!GameApplication.instance) {
       if (!options) {
-        throw new Error(
-          "GameApplication options are required for the first initialization"
-        );
+        throw new Error('GameApplication options are required for the first initialization');
       }
       if (!options.scenes) {
-        throw new Error("scenes are required");
+        throw new Error('scenes are required');
       }
       GameApplication.instance = new GameApplication(options);
     }
@@ -94,9 +88,7 @@ export class GameApplication extends Application {
 
   public static getInstance(): GameApplication {
     if (!GameApplication.instance) {
-      throw new Error(
-        "GameApplication options are required for the first initialization"
-      );
+      throw new Error('GameApplication options are required for the first initialization');
     }
     return GameApplication.instance;
   }
@@ -116,7 +108,7 @@ export class GameApplication extends Application {
     const Klass = new scene();
 
     if (!this.sceneContainer) {
-      throw new Error("Scene container not found");
+      throw new Error('Scene container not found');
     }
 
     if (this.currentScene) {
@@ -130,11 +122,11 @@ export class GameApplication extends Application {
     this.sceneContainer.addChild(this.currentScene);
 
     // show the ui after splash
-    if (sceneId === "splash") {
+    if (sceneId === 'splash') {
       gsap.to(this.ui, {
         alpha: 0,
         duration: 0.3,
-        ease: "power2.in",
+        ease: 'power2.in',
         onComplete: () => {
           this.ui!.visible = false;
         },
@@ -144,7 +136,7 @@ export class GameApplication extends Application {
       gsap.to(this.ui, {
         alpha: 1,
         duration: 0.4,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
     }
   }
@@ -153,7 +145,7 @@ export class GameApplication extends Application {
   private async setup(): Promise<void> {
     initDevtools({ app: this as unknown as Application });
     this.addStats();
-    window.addEventListener("resize", this.handleResize.bind(this));
+    window.addEventListener('resize', this.handleResize.bind(this));
 
     await this.initAssets();
     this.initContainers();
@@ -164,21 +156,21 @@ export class GameApplication extends Application {
   private addStats() {
     const stats = new Stats();
     stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    stats.dom.id = "stats";
+    stats.dom.id = 'stats';
     document.body.appendChild(stats.dom);
     Ticker.shared.add(stats.update, stats, UPDATE_PRIORITY.UTILITY);
   }
 
   private async initAssets(): Promise<void> {
     // init pixi assets
-    await Assets.init({ manifest: assetManifest, basePath: "assets" });
-    await Assets.loadBundle("preload");
-    await Assets.loadBundle("game");
+    await Assets.init({ manifest: assetManifest, basePath: 'assets' });
+    await Assets.loadBundle('preload');
+    await Assets.loadBundle('game');
   }
 
   private initContainers(): void {
     this.sceneContainer = new Container({
-      name: "scenes",
+      name: 'scenes',
       autoResize: true,
       autoUpdate: false,
     });
@@ -196,7 +188,7 @@ export class GameApplication extends Application {
     child.y = this.size.height * 0.5;
   }
 
-  private cancelResize() {
+  private _cancelResize() {
     if (this._resizeId) {
       cancelAnimationFrame(this._resizeId);
       this._resizeId = null;
@@ -204,7 +196,7 @@ export class GameApplication extends Application {
   }
   // resizing
   private handleResize(): void {
-    this.cancelResize();
+    this._cancelResize!();
 
     let canvasWidth: number;
     let canvasHeight: number;
@@ -213,8 +205,7 @@ export class GameApplication extends Application {
       canvasWidth = globalThis.innerWidth;
       canvasHeight = globalThis.innerHeight;
     } else {
-      const { clientWidth, clientHeight } =
-        GameApplication._resizeTo as HTMLElement;
+      const { clientWidth, clientHeight } = GameApplication._resizeTo as HTMLElement;
 
       canvasWidth = clientWidth;
       canvasHeight = clientHeight;
@@ -224,7 +215,7 @@ export class GameApplication extends Application {
       canvasHeight,
       this.resizeOptions.minWidth ?? 768,
       this.resizeOptions.minHeight ?? 1024,
-      this.resizeOptions.letterbox ?? false
+      this.resizeOptions.letterbox ?? false,
     );
     this.view.style.width = `${canvasWidth}px`;
     this.view.style.height = `${canvasHeight}px`;

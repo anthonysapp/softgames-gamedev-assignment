@@ -1,9 +1,9 @@
-import { Container } from "@/display/Container";
-import { SpeechBubble } from "@/gameObjects/SpeechBubble";
-import { delay } from "@/utils/delay";
-import { AvatarData } from "@/utils/types";
-import gsap from "gsap";
-import { BitmapText, Graphics, Sprite, Texture } from "pixi.js";
+import { Container } from '@/display/Container';
+import { SpeechBubble } from '@/gameObjects/SpeechBubble';
+import { delay } from '@/utils/delay';
+import { AvatarData } from '@/utils/types';
+import gsap from 'gsap';
+import { BitmapText, Graphics, Sprite, Texture } from 'pixi.js';
 
 /**
  * A talking head
@@ -35,7 +35,7 @@ export class Avatar extends Container {
     this.bubble = this.addChild(new SpeechBubble(data.position));
     this.bubble.y = -20;
 
-    if (this.data.position === "left") {
+    if (this.data.position === 'left') {
       this.bubble.x = 140;
     } else {
       this.bubble.x = -120 - 300;
@@ -71,12 +71,12 @@ export class Avatar extends Container {
     gsap.to(this.emote, {
       alpha: 1,
       duration: 0.5,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
     gsap.to(this.emote.pivot, {
       y: 10,
       duration: 0.5,
-      ease: "power2.out",
+      ease: 'power2.out',
     });
   }
 
@@ -84,12 +84,12 @@ export class Avatar extends Container {
     gsap.to(this.emote, {
       alpha: 0,
       duration: 0.25,
-      ease: "power2.in",
+      ease: 'power2.in',
     });
     gsap.to(this.emote.pivot, {
       y: 0,
       duration: 0.25,
-      ease: "power2.in",
+      ease: 'power2.in',
     });
   }
 
@@ -103,16 +103,16 @@ export class Avatar extends Container {
     tl.to(this.bubble, {
       alpha: 0,
       duration: 0.25,
-      ease: "power2.in",
+      ease: 'power2.in',
     });
     tl.to(
       this.bubble!.pivot,
       {
         y: 10,
         duration: 0.25,
-        ease: "power2.in",
+        ease: 'power2.in',
       },
-      "<"
+      '<',
     );
   }
 
@@ -124,16 +124,16 @@ export class Avatar extends Container {
     tl.to(this.bubble, {
       alpha: 1,
       duration: 0.4,
-      ease: "power2.in",
+      ease: 'power2.in',
     });
     tl.to(
       this.bubble!.pivot,
       {
         y: 0,
         duration: 0.4,
-        ease: "power2.in",
+        ease: 'power2.in',
       },
-      "<"
+      '<',
     );
     return tl.play();
   }
@@ -142,7 +142,7 @@ export class Avatar extends Container {
     await this.show();
     for (let i = 0; i < words.length; i++) {
       await delay(0.25);
-      if (words[i].charAt(0) === "{") {
+      if (words[i].charAt(0) === '{') {
         this.changeExpression(words[i].slice(1, -1));
         continue;
       }

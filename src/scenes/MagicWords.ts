@@ -1,9 +1,9 @@
-import { Avatar } from "@/gameObjects/Avatar";
-import { Scene } from "@/scenes/Scene";
-import { Colors } from "@/utils/constants";
-import { DialogueData, MagicWordsData, Size } from "@/utils/types";
-import gsap from "gsap";
-import { Assets, Container, Sprite } from "pixi.js";
+import { Avatar } from '@/gameObjects/Avatar';
+import { Scene } from '@/scenes/Scene';
+import { Colors } from '@/utils/constants';
+import { DialogueData, MagicWordsData, Size } from '@/utils/types';
+import gsap from 'gsap';
+import { Assets, Container, Sprite } from 'pixi.js';
 
 export class MagicWords extends Scene {
   data: MagicWordsData | null = null;
@@ -16,7 +16,7 @@ export class MagicWords extends Scene {
   avatars: Map<string, Avatar> = new Map();
 
   constructor() {
-    super({ name: "MagicWords" });
+    super({ name: 'MagicWords' });
   }
 
   get dialogue(): DialogueData[] {
@@ -36,9 +36,9 @@ export class MagicWords extends Scene {
   }
 
   async loadData() {
-    const json = (await fetch(
-      "https://private-624120-softgamesassignment.apiary-mock.com/v2/magicwords"
-    ).then((res) => res.json())) as MagicWordsData;
+    const json = (await fetch('https://private-624120-softgamesassignment.apiary-mock.com/v2/magicwords').then((res) =>
+      res.json(),
+    )) as MagicWordsData;
 
     const queue: { alias: string; src: string }[] = [];
     json.dialogue.forEach((dialogue) => {
@@ -70,7 +70,7 @@ export class MagicWords extends Scene {
       avatar.pivot.y = -20;
       avatar.alpha = 0;
 
-      if (avatarData.position === "left") {
+      if (avatarData.position === 'left') {
         this.leftContainer.addChild(avatar);
       } else {
         this.rightContainer.addChild(avatar);
@@ -89,16 +89,16 @@ export class MagicWords extends Scene {
       tl.to(avatar, {
         alpha: 1,
         duration: 0.4,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
       tl.to(
         avatar.pivot,
         {
           y: 0,
           duration: 0.4,
-          ease: "power2.out",
+          ease: 'power2.out',
         },
-        "<"
+        '<',
       );
     }
     await tl.play();
@@ -116,7 +116,7 @@ export class MagicWords extends Scene {
       this.nextDialogue();
       return;
     }
-    await avatar.say(this.currentDialogue.text.split(" "));
+    await avatar.say(this.currentDialogue.text.split(' '));
     this.nextDialogue();
   }
 
@@ -130,7 +130,7 @@ export class MagicWords extends Scene {
   }
 
   complete() {
-    console.log("Complete!");
+    console.log('Complete!');
   }
 
   resize(size: Size) {

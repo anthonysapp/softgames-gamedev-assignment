@@ -1,11 +1,11 @@
-import { Fire } from "@/gameObjects/Fire";
-import { Scene } from "@/scenes/Scene";
+import { Fire } from '@/gameObjects/Fire';
+import { Scene } from '@/scenes/Scene';
 
 export class PhoenixFlame extends Scene {
   private fire: Fire | null = null;
 
   constructor() {
-    super({ name: "PhoenixFlame" });
+    super({ name: 'PhoenixFlame' });
   }
 
   initialize() {
