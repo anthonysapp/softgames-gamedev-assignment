@@ -1,0 +1,103 @@
+{
+  "bundles": [
+    {
+      "name": "default",
+      "assets": []
+    },
+    {
+      "name": "game",
+      "assets": [
+        {
+          "alias": [
+            "game/cards",
+            "cards"
+          ],
+          "src": [
+            "game/cards@0.5x.webp.json",
+            "game/cards@0.5x.png.json",
+            "game/cards.webp.json",
+            "game/cards.png.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true,
+              "tps": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "game/fx",
+            "fx"
+          ],
+          "src": [
+            "game/fx@0.5x.webp.json",
+            "game/fx@0.5x.png.json",
+            "game/fx.webp.json",
+            "game/fx.png.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true,
+              "tps": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "preload",
+      "assets": [
+        {
+          "alias": [
+            "preload/Bangers.fnt",
+            "Bangers.fnt"
+          ],
+          "src": [
+            "preload/Bangers.fnt"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/Bangers.png",
+            "Bangers.png"
+          ],
+          "src": [
+            "preload/Bangers@0.5x.webp",
+            "preload/Bangers@0.5x.png",
+            "preload/Bangers.webp",
+            "preload/Bangers.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui",
+            "ui"
+          ],
+          "src": [
+            "preload/ui@0.5x.webp.json",
+            "preload/ui@0.5x.png.json",
+            "preload/ui.webp.json",
+            "preload/ui.png.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true,
+              "tps": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
