@@ -9,6 +9,7 @@ export class PhoenixFlame extends Scene {
   }
 
   initialize() {
+    this.addColoredBackground(0x0);
     this.fire = this.addChild(new Fire());
   }
 

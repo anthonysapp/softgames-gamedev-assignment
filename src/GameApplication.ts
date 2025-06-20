@@ -25,6 +25,7 @@ export interface IGameOptions extends IApplicationOptions {
 }
 
 export class GameApplication extends Application {
+  private static SCENE_TRANSITION_DURATION = 1;
   private static instance: GameApplication | null = null;
 
   public onResize: Signal<(detail: Size) => void> = new Signal();
@@ -32,6 +33,7 @@ export class GameApplication extends Application {
   public scenes: Map<string, typeof Scene> = new Map();
 
   public currentScene: Scene | null = null;
+  public currentSceneId: SceneID | null = null;
   public sceneContainer: Container | null = null;
   public ui: GameUI | null = null;
 
@@ -101,25 +103,70 @@ export class GameApplication extends Application {
   }
 
   public async setScene(sceneId: SceneID): Promise<void> {
+    if (sceneId === this.currentSceneId) {
+      return;
+    }
     const scene = await this.scenes.get(sceneId);
     if (!scene) {
       throw new Error(`Scene ${sceneId} not found`);
     }
+    this.currentSceneId = sceneId;
     const Klass = new scene();
 
     if (!this.sceneContainer) {
       throw new Error('Scene container not found');
     }
-
+    let oldScene;
     if (this.currentScene) {
-      this.sceneContainer.removeChild(this.currentScene);
+      oldScene = this.currentScene;
     }
+
     this.currentScene = Klass as Scene;
     this.center(this.currentScene);
     this.currentScene.initialize();
     this.currentScene.resizeInternal(this.size);
     this.currentScene.resize(this.size);
+
     this.sceneContainer.addChild(this.currentScene);
+
+    if (oldScene) {
+      this.currentScene.pivot.x = this.size.width * 1.25;
+      this.currentScene.scale.set(2.5);
+
+      gsap.to(oldScene, {
+        alpha: 0,
+        duration: GameApplication.SCENE_TRANSITION_DURATION,
+        ease: 'power2.out',
+      });
+
+      gsap.to(oldScene.pivot, {
+        x: this.size.width * -0.75,
+        duration: GameApplication.SCENE_TRANSITION_DURATION,
+        ease: 'power2.out',
+      });
+
+      gsap.to(oldScene.scale, {
+        x: 0.5,
+        y: 0.5,
+        duration: GameApplication.SCENE_TRANSITION_DURATION,
+        ease: 'power2.out',
+      });
+
+      gsap.to(this.currentScene.pivot, {
+        x: 0,
+        duration: GameApplication.SCENE_TRANSITION_DURATION,
+        ease: 'power2.out',
+      });
+      gsap.to(this.currentScene.scale, {
+        x: 1,
+        y: 1,
+        duration: GameApplication.SCENE_TRANSITION_DURATION,
+        ease: 'power2.out',
+        onComplete: () => {
+          oldScene.parent?.removeChild(oldScene);
+        },
+      });
+    }
 
     // show the ui after splash
     if (sceneId === 'splash') {

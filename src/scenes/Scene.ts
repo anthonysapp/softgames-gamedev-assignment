@@ -5,7 +5,6 @@ import { Sprite, Texture, type IDestroyOptions } from 'pixi.js';
 /**
  * A base scene to build from
  */
-
 export class Scene extends Container {
   protected __background: Sprite | null = null;
 
@@ -66,6 +65,10 @@ export class Scene extends Container {
     void size;
   }
 
+  /**
+   * Destroy the scene
+   * @param options - The destroy options
+   */
   destroy(options?: IDestroyOptions): void {
     super.destroy(options);
   }
