@@ -5,7 +5,7 @@ A multi-scene interactive web game built with **PixiJS** and **TypeScript**, sho
 ## 🎮 Game Scenes
 
 - **Splash** - Game introduction and loading screen
-- **Ace of Shadows** - Animated card deck with smooth card flipping between two stacks 🂡
+- **Ace of Shadows** - Animated card deck with smooth card flipping between two stacks ♠
 - **Magic Words** - Interactive dialogue system with character avatars and speech bubbles 💬
 - **Phoenix Flame** - Particle-based fire animation and effects 🔥
 
