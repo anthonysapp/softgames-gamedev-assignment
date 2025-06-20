@@ -12,7 +12,9 @@ import { Container } from "pixi.js";
  * Flip one card from stack to stack
  */
 export class AceOfShadows extends Scene {
-  private readonly ANIMATION_DURATION = 2; // 2 seconds as per the instructions
+  private static readonly ANIMATION_DURATION = 2; // 2 seconds as per the instructions
+  private static readonly ANIMATION_DELAY =
+    AceOfShadows.ANIMATION_DURATION * 0.5; // 1 second as per the instructions -
   private static readonly STACK_POSITIONS = [50, 300]; // the positions of the stacks
   private readonly STACK_OFFSET = { x: 0.25, y: 1 }; // the offset of the cards
 
@@ -77,7 +79,7 @@ export class AceOfShadows extends Scene {
    * This is used to animate the next card
    */
   async initAnimationTimer() {
-    await delay(this.ANIMATION_DURATION);
+    await delay(AceOfShadows.ANIMATION_DURATION);
     this.animateNext();
   }
 
@@ -103,15 +105,15 @@ export class AceOfShadows extends Scene {
     this.mainContainer.setChildIndex(container, 1);
     otherStack.push(card!);
 
-    await gsap.to(card!, {
+    gsap.to(card!, {
       x: this.nextPosition.x,
       y: this.nextPosition.y,
-      duration: this.ANIMATION_DURATION,
+      duration: AceOfShadows.ANIMATION_DURATION,
       ease: "power2.inOut",
       onStart: () => {
         card!.flip(
-          this.ANIMATION_DURATION * 0.25,
-          this.ANIMATION_DURATION * 0.25
+          AceOfShadows.ANIMATION_DURATION * 0.25,
+          AceOfShadows.ANIMATION_DURATION * 0.25
         );
       },
     });
@@ -128,7 +130,11 @@ export class AceOfShadows extends Scene {
       this.currentStack = stack === this.stack1 ? this.stack2 : this.stack1;
     }
 
-    this.animateNext(stack.length === 0 ? this.ANIMATION_DURATION * 0.5 : 0);
+    this.animateNext(
+      stack.length === 0 ?
+        AceOfShadows.ANIMATION_DURATION + AceOfShadows.ANIMATION_DELAY
+      : AceOfShadows.ANIMATION_DELAY
+    );
   }
 
   /**

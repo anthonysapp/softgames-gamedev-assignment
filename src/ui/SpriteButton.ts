@@ -1,6 +1,6 @@
 import { Container } from "@/display/Container";
 import { Button } from "@pixi/ui";
-import { Sprite, Text, Texture } from "pixi.js";
+import { BitmapText, Sprite, Texture } from "pixi.js";
 
 export type SpriteButtonProps = {
   text: string;
@@ -23,7 +23,7 @@ const defaultProps = {
 
 export class SpriteButton extends Button {
   private buttonView = new Container();
-  private textView: Text;
+  private textView: BitmapText;
   private buttonBg = new Sprite();
   private action: () => void;
 
@@ -43,11 +43,12 @@ export class SpriteButton extends Button {
 
     this.buttonBg.anchor.set(0.5);
 
-    this.textView = new Text(props.text, {
+    this.textView = new BitmapText(props.text ?? "", {
+      fontName: "Bangers",
       fontSize: 40,
       fill: 0xffffff,
     });
-    this.textView.y = -10;
+    this.textView.y = -5;
     this.textView.anchor.set(0.5);
 
     this.buttonView.addChild(this.buttonBg, this.textView);
@@ -60,27 +61,27 @@ export class SpriteButton extends Button {
 
   override down() {
     this.buttonBg.texture = Texture.from(this.props.textures.down);
-    this.textView.y = 0;
+    this.textView.y = 2;
   }
 
   override press() {
     this.buttonBg.texture = Texture.from(this.props.textures.down);
-    this.textView.y = -10;
+    this.textView.y = -5;
     this.action();
   }
 
   override up(): void {
     this.buttonBg.texture = Texture.from(this.props.textures.default);
-    this.textView.y = -10;
+    this.textView.y = -5;
   }
 
   override upOut(): void {
     this.buttonBg.texture = Texture.from(this.props.textures.default);
-    this.textView.y = -10;
+    this.textView.y = -5;
   }
 
   override out(): void {
     this.buttonBg.texture = Texture.from(this.props.textures.default);
-    this.textView.y = -10;
+    this.textView.y = -5;
   }
 }
