@@ -83,7 +83,7 @@ export class GameUI extends Container {
     const buttonView = this.menu.addChild(button.view);
     buttonView.scale.set(0.75);
     buttonView.y = y;
-    buttonView.x = 185;
+    buttonView.x = 182;
 
     return button;
   }
