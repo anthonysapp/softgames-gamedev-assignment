@@ -23,8 +23,10 @@ const defaultOptions: IContainerOptions = {
 export class Container extends PixiContainer {
   protected options: IContainerOptions;
 
+  // store the game size
   public size: Size = { width: 0, height: 0 };
 
+  // access to the application singleton
   get app(): GameApplication {
     return GameApplication.getInstance();
   }
@@ -53,15 +55,18 @@ export class Container extends PixiContainer {
     this.resize(size);
   }
 
+  // override this to add custom resize logic
   public resizeInternal(size: Size): void {
     void size;
   }
 
+  // this is the method that will be called by the application
   public resize(size: Size): void {
     this.resizeInternal(size);
     void size;
   }
 
+  // override this to add custom update logic
   public update(delta: number): void {
     void delta;
   }
